@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.libgdx.zeppelinraiders.game.WorldController;
 import com.libgdx.zeppelinraiders.game.WorldRenderer;
 
-public class CanyonBunnyMain implements ApplicationListener
+public class ZeppelinRaidersMain implements ApplicationListener
 {
 	private static final String TAG =		
-		CanyonBunnyMain.class.getName();
+		ZeppelinRaidersMain.class.getName();
 	
 	private WorldController worldController;
 	private WorldRenderer worldRenderer;

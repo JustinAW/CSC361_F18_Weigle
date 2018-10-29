@@ -2,11 +2,11 @@ package com.libgdx.zeppelinraiders.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.libgdx.zeppelinraiders.CanyonBunnyMain;
+import com.libgdx.zeppelinraiders.ZeppelinRaidersMain;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new CanyonBunnyMain(), config);
+		new LwjglApplication(new ZeppelinRaidersMain(), config);
 	}
 }
