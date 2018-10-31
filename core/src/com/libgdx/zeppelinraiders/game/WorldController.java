@@ -42,9 +42,9 @@ public class WorldController extends InputAdapter
 
 		//Create a list of texture regions
 		Array<TextureRegion> regions = new Array<TextureRegion>();
-		regions.add(Assets.instance.bunny.head);
-		regions.add(Assets.instance.feather.feather);
-		regions.add(Assets.instance.goldCoin.goldCoin);
+		regions.add(Assets.instance.player.player);
+		regions.add(Assets.instance.powerup.powerup);
+		regions.add(Assets.instance.collectible.collectible);
 		
 		// Create new sprites using the just created texture
 		for (int i = 0; i < testSprites.length; i++)
@@ -69,21 +69,21 @@ public class WorldController extends InputAdapter
 		selectedSprite = 0;
 	}
 	
-	private Pixmap createProceduralPixmap (int width, int height)
-	{
-		Pixmap pixmap = new Pixmap(width, height, Format.RGBA8888);
-		// Fill square with red color at 50% opacity
-		pixmap.setColor(1, 0, 0, 0.5f);
-		pixmap.fill();
-		// Draw a yellow-colored X shape on square
-		pixmap.setColor(1, 1, 0, 1);
-		pixmap.drawLine(0, 0, width, height);
-		pixmap.drawLine(width, 0, 0, height);
-		// Draw a cyan-colored border around square
-		pixmap.setColor(0, 1, 1, 1);
-		pixmap.drawRectangle(0, 0, width, height);
-		return pixmap;
-	}
+//	private Pixmap createProceduralPixmap (int width, int height)
+//	{
+//		Pixmap pixmap = new Pixmap(width, height, Format.RGBA8888);
+//		// Fill square with red color at 50% opacity
+//		pixmap.setColor(1, 0, 0, 0.5f);
+//		pixmap.fill();
+//		// Draw a yellow-colored X shape on square
+//		pixmap.setColor(1, 1, 0, 1);
+//		pixmap.drawLine(0, 0, width, height);
+//		pixmap.drawLine(width, 0, 0, height);
+//		// Draw a cyan-colored border around square
+//		pixmap.setColor(0, 1, 1, 1);
+//		pixmap.drawRectangle(0, 0, width, height);
+//		return pixmap;
+//	}
 	
 	public void update (float deltaTime)
 	{

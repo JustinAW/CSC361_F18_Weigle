@@ -28,10 +28,10 @@ public class Assets implements Disposable, AssetErrorListener
 	// singleton: prevent instantiation from other classes
 	private Assets() {}
 	
-	public AssetBunny bunny;
-	public AssetRock rock;
-	public AssetGoldCoin goldCoin;
-	public AssetFeather feather;
+	public AssetPlayer player;
+	public AssetPlatform platform;
+	public AssetCollectible collectible;
+	public AssetPowerup powerup;
 	public AssetLevelDecoration levelDecoration;
 	
 	public void init (AssetManager assetManager)
@@ -57,52 +57,52 @@ public class Assets implements Disposable, AssetErrorListener
 		}
 		
 		// create game resource objects
-		bunny = new AssetBunny(atlas);
-		rock = new AssetRock(atlas);
-		goldCoin = new AssetGoldCoin(atlas);
-		feather = new AssetFeather(atlas);
+		player = new AssetPlayer(atlas);
+		platform = new AssetPlatform(atlas);
+		collectible = new AssetCollectible(atlas);
+		powerup = new AssetPowerup(atlas);
 		levelDecoration = new AssetLevelDecoration(atlas);
 	}
 	
-	public class AssetBunny
+	public class AssetPlayer
 	{
-		public final AtlasRegion head;
+		public final AtlasRegion player;
 		
-		public AssetBunny (TextureAtlas atlas)
+		public AssetPlayer (TextureAtlas atlas)
 		{
-			head = atlas.findRegion("bunny_head");
+			player = atlas.findRegion("player");
 		}
 	}
 	
-	public class AssetRock
+	public class AssetPlatform
 	{
 		public final AtlasRegion edge;
 		public final AtlasRegion middle;
 		
-		public AssetRock (TextureAtlas atlas)
+		public AssetPlatform (TextureAtlas atlas)
 		{
-			edge = atlas.findRegion("rock_edge");
-			middle = atlas.findRegion("rock_middle");
+			edge = atlas.findRegion("platform_edge");
+			middle = atlas.findRegion("platform_middle");
 		}
 	}
 	
-	public class AssetGoldCoin
+	public class AssetCollectible
 	{
-		public final AtlasRegion goldCoin;
+		public final AtlasRegion collectible;
 		
-		public AssetGoldCoin (TextureAtlas atlas)
+		public AssetCollectible (TextureAtlas atlas)
 		{
-			goldCoin = atlas.findRegion("item_gold_coin");
+			collectible = atlas.findRegion("collectible");
 		}
 	}
 	
-	public class AssetFeather
+	public class AssetPowerup
 	{
-		public final AtlasRegion feather;
+		public final AtlasRegion powerup;
 		
-		public AssetFeather (TextureAtlas atlas)
+		public AssetPowerup (TextureAtlas atlas)
 		{
-			feather = atlas.findRegion("item_feather");
+			powerup = atlas.findRegion("powerup");
 		}
 	}
 	
