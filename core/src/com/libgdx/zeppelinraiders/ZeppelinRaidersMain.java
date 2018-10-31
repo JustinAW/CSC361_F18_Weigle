@@ -2,8 +2,10 @@ package com.libgdx.zeppelinraiders;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.libgdx.zeppelinraiders.game.Assets;
 import com.libgdx.zeppelinraiders.game.WorldController;
 import com.libgdx.zeppelinraiders.game.WorldRenderer;
 
@@ -20,6 +22,9 @@ public class ZeppelinRaidersMain implements ApplicationListener
 	{ 
 		//Set Libgdx log level to DEBUG
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		
+		//Load assets
+		Assets.instance.init(new AssetManager());
 		
 		//Initialize controller and renderer
 		worldController = new WorldController();
@@ -71,6 +76,7 @@ public class ZeppelinRaidersMain implements ApplicationListener
 	@Override public void dispose () 
 	{
 		worldRenderer.dispose();
+		Assets.instance.dispose();
 	}
 	
 	
