@@ -70,7 +70,7 @@ public class Assets implements Disposable, AssetErrorListener
 		
 		public AssetPlayer (TextureAtlas atlas)
 		{
-			player = atlas.findRegion("eskimojoe_1");
+			player = atlas.findRegion("eskimojoe01");
 		}
 	}
 	
@@ -117,9 +117,9 @@ public class Assets implements Disposable, AssetErrorListener
 		
 		public AssetLevelDecoration (TextureAtlas atlas)
 		{
-			cloud01 = atlas.findRegion("cloud_1");
-			cloud02 = atlas.findRegion("cloud_2");
-			cloud03 = atlas.findRegion("cloud_3");
+			cloud01 = atlas.findRegion("cloud01");
+			cloud02 = atlas.findRegion("cloud02");
+			cloud03 = atlas.findRegion("cloud03");
 			mountainLeft = atlas.findRegion("mountain_left");
 			mountainRight = atlas.findRegion("mountain_right");
 			water = atlas.findRegion("water");

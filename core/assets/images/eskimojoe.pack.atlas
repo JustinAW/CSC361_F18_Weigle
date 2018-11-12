@@ -1,0 +1,97 @@
+
+eskimojoe.pack.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cloud01
+  rotate: false
+  xy: 462, 478
+  size: 178, 78
+  orig: 178, 78
+  offset: 0, 0
+  index: -1
+cloud02
+  rotate: false
+  xy: 262, 468
+  size: 198, 88
+  orig: 198, 88
+  offset: 0, 0
+  index: -1
+cloud03
+  rotate: false
+  xy: 262, 381
+  size: 182, 85
+  orig: 182, 85
+  offset: 0, 0
+  index: -1
+eskimojoe01
+  rotate: false
+  xy: 262, 251
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+eskimojoe02
+  rotate: false
+  xy: 262, 121
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+eskimojoe03
+  rotate: false
+  xy: 642, 428
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+fish
+  rotate: false
+  xy: 262, 63
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1
+glacier_edge
+  rotate: false
+  xy: 2, 44
+  size: 128, 512
+  orig: 128, 512
+  offset: 0, 0
+  index: -1
+glacier_middle
+  rotate: false
+  xy: 132, 44
+  size: 128, 512
+  orig: 128, 512
+  offset: 0, 0
+  index: -1
+mountain_left
+  rotate: false
+  xy: 2, 785
+  size: 1000, 225
+  orig: 1000, 225
+  offset: 0, 0
+  index: -1
+mountain_right
+  rotate: false
+  xy: 2, 558
+  size: 1000, 225
+  orig: 1000, 225
+  offset: 0, 0
+  index: -1
+snow_shoes
+  rotate: false
+  xy: 2, 2
+  size: 45, 40
+  orig: 45, 40
+  offset: 0, 0
+  index: -1
+water
+  rotate: false
+  xy: 392, 219
+  size: 32, 160
+  orig: 32, 160
+  offset: 0, 0
+  index: -1
