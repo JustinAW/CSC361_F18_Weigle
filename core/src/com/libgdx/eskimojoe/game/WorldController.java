@@ -1,4 +1,4 @@
-package com.libgdx.zeppelinraiders.game;
+package com.libgdx.eskimojoe.game;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -11,8 +11,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import com.libgdx.zeppelinraiders.game.Assets;
-import com.libgdx.zeppelinraiders.util.CameraHelper;
+import com.libgdx.eskimojoe.game.Assets;
+import com.libgdx.eskimojoe.util.CameraHelper;
 
 public class WorldController extends InputAdapter
 {
