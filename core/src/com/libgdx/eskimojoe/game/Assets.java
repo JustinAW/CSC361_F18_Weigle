@@ -2,7 +2,7 @@
  * @author Justin Weigle
  */
 
-package com.libgdx.zeppelinraiders.game;
+package com.libgdx.eskimojoe.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.utils.Disposable;
-import com.libgdx.zeppelinraiders.util.Constants;
+import com.libgdx.eskimojoe.util.Constants;
 
 
 /**
@@ -70,7 +70,7 @@ public class Assets implements Disposable, AssetErrorListener
 		
 		public AssetPlayer (TextureAtlas atlas)
 		{
-			player = atlas.findRegion("player");
+			player = atlas.findRegion("eskimojoe_1");
 		}
 	}
 	
@@ -81,8 +81,8 @@ public class Assets implements Disposable, AssetErrorListener
 		
 		public AssetPlatform (TextureAtlas atlas)
 		{
-			edge = atlas.findRegion("platform_edge");
-			middle = atlas.findRegion("platform_middle");
+			edge = atlas.findRegion("glacier_edge");
+			middle = atlas.findRegion("glacier_middle");
 		}
 	}
 	
@@ -92,7 +92,7 @@ public class Assets implements Disposable, AssetErrorListener
 		
 		public AssetCollectible (TextureAtlas atlas)
 		{
-			collectible = atlas.findRegion("collectible");
+			collectible = atlas.findRegion("fish");
 		}
 	}
 	
@@ -102,7 +102,7 @@ public class Assets implements Disposable, AssetErrorListener
 		
 		public AssetPowerup (TextureAtlas atlas)
 		{
-			powerup = atlas.findRegion("powerup");
+			powerup = atlas.findRegion("snow_shoes");
 		}
 	}
 	
@@ -113,16 +113,16 @@ public class Assets implements Disposable, AssetErrorListener
 		public final AtlasRegion cloud03;
 		public final AtlasRegion mountainLeft;
 		public final AtlasRegion mountainRight;
-		public final AtlasRegion waterOverlay;
+		public final AtlasRegion water;
 		
 		public AssetLevelDecoration (TextureAtlas atlas)
 		{
-			cloud01 = atlas.findRegion("cloud01");
-			cloud02 = atlas.findRegion("cloud02");
-			cloud03 = atlas.findRegion("cloud03");
+			cloud01 = atlas.findRegion("cloud_1");
+			cloud02 = atlas.findRegion("cloud_2");
+			cloud03 = atlas.findRegion("cloud_3");
 			mountainLeft = atlas.findRegion("mountain_left");
 			mountainRight = atlas.findRegion("mountain_right");
-			waterOverlay = atlas.findRegion("water_overlay");
+			water = atlas.findRegion("water");
 		}
 	}
 	

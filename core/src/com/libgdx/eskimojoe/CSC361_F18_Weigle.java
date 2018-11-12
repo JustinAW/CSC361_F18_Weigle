@@ -1,4 +1,4 @@
-package com.libgdx.zeppelinraiders;
+package com.libgdx.eskimojoe;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
