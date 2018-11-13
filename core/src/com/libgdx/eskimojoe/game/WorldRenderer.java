@@ -1,10 +1,10 @@
-package com.libgdx.zeppelinraiders.game;
+package com.libgdx.eskimojoe.game;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
-import com.libgdx.zeppelinraiders.util.Constants;
+import com.libgdx.eskimojoe.util.Constants;
 
 public class WorldRenderer implements Disposable
 {

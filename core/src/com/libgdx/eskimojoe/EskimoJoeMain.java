@@ -1,18 +1,18 @@
-package com.libgdx.zeppelinraiders;
+package com.libgdx.eskimojoe;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.libgdx.zeppelinraiders.game.Assets;
-import com.libgdx.zeppelinraiders.game.WorldController;
-import com.libgdx.zeppelinraiders.game.WorldRenderer;
+import com.libgdx.eskimojoe.game.Assets;
+import com.libgdx.eskimojoe.game.WorldController;
+import com.libgdx.eskimojoe.game.WorldRenderer;
 
-public class ZeppelinRaidersMain implements ApplicationListener
+public class EskimoJoeMain implements ApplicationListener
 {
 	private static final String TAG =		
-		ZeppelinRaidersMain.class.getName();
+		EskimoJoeMain.class.getName();
 	
 	private WorldController worldController;
 	private WorldRenderer worldRenderer;
