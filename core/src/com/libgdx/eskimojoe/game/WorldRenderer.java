@@ -40,6 +40,7 @@ public class WorldRenderer implements Disposable
 	public void render() 
 	{
 		renderWorld(batch);
+		renderGui(batch);
 	}
 	
 	private void renderWorld(SpriteBatch batch)
@@ -48,6 +49,21 @@ public class WorldRenderer implements Disposable
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		worldController.level.render(batch);
+		batch.end();
+	}
+	
+	private void renderGui(SpriteBatch batch)
+	{
+		batch.setProjectionMatrix(cameraGUI.combined);
+		batch.begin();
+		//draw collected gold coins icon + text to top left edge
+		renderGuiScore(batch);
+		
+		//draw extra lives icon + text on top right
+		renderGuiExtraLives(batch);
+		
+		//draw FPS text on bottom right
+		renderGuiFpsCounter(batch);
 		batch.end();
 	}
 	
