@@ -23,7 +23,7 @@ public class Glacier extends AbstractGameObject
 		regEdge = Assets.instance.platform.edge;
 		regMiddle = Assets.instance.platform.middle;
 		
-		// Start length of this rock
+		// Start length of this glacier
 		setLength(1);
 	}
 	
@@ -61,18 +61,18 @@ public class Glacier extends AbstractGameObject
 		// Draw middle
 		relX = 0;
 		reg = regMiddle;
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length*2; i++)
 		{
 			batch.draw(reg.getTexture(), 
 					position.x + relX, position.y + relY, 
 					origin.x, origin.y, 
-					dimension.x, dimension.y, 
+					dimension.x / 2, dimension.y, 
 					scale.x, scale.y, 
 					rotation, 
 					reg.getRegionX(), reg.getRegionY(), 
 					reg.getRegionWidth(), reg.getRegionHeight(), 
 					false, false);
-			relX += dimension.x;
+			relX += dimension.x / 2;
 		}
 		
 		// Draw right edge

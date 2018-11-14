@@ -6,91 +6,91 @@ filter: Nearest,Nearest
 repeat: none
 cloud01
   rotate: false
-  xy: 384, 475
+  xy: 379, 479
   size: 178, 78
   orig: 178, 78
   offset: 0, 0
   index: -1
 cloud02
   rotate: false
-  xy: 184, 465
+  xy: 179, 469
   size: 198, 88
   orig: 198, 88
   offset: 0, 0
   index: -1
 cloud03
   rotate: false
-  xy: 184, 378
+  xy: 179, 382
   size: 182, 85
   orig: 182, 85
   offset: 0, 0
   index: -1
 eskimojoe01
   rotate: false
-  xy: 184, 248
+  xy: 179, 252
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 eskimojoe02
   rotate: false
-  xy: 184, 118
+  xy: 179, 122
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 eskimojoe03
   rotate: false
-  xy: 564, 425
+  xy: 559, 429
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 fish
   rotate: false
-  xy: 184, 60
+  xy: 2, 2
   size: 56, 56
   orig: 56, 56
   offset: 0, 0
   index: -1
 glacier_edge
   rotate: false
-  xy: 2, 44
-  size: 93, 509
-  orig: 93, 509
+  xy: 2, 60
+  size: 88, 497
+  orig: 88, 497
   offset: 0, 0
   index: -1
 glacier_middle
   rotate: false
-  xy: 97, 48
-  size: 85, 505
-  orig: 85, 505
+  xy: 92, 60
+  size: 85, 497
+  orig: 85, 497
   offset: 0, 0
   index: -1
 mountain_left
   rotate: false
-  xy: 2, 782
+  xy: 2, 786
   size: 1000, 225
   orig: 1000, 225
   offset: 0, 0
   index: -1
 mountain_right
   rotate: false
-  xy: 2, 555
+  xy: 2, 559
   size: 1000, 225
   orig: 1000, 225
   offset: 0, 0
   index: -1
 snow_shoes
   rotate: false
-  xy: 2, 2
+  xy: 179, 80
   size: 45, 40
   orig: 45, 40
   offset: 0, 0
   index: -1
 water
   rotate: false
-  xy: 314, 216
+  xy: 309, 220
   size: 32, 160
   orig: 32, 160
   offset: 0, 0
