@@ -6,8 +6,11 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.utils.Array;
 import com.libgdx.eskimojoe.game.objects.AbstractGameObject;
 import com.libgdx.eskimojoe.game.objects.Clouds;
+import com.libgdx.eskimojoe.game.objects.EskimoJoe;
+import com.libgdx.eskimojoe.game.objects.Fish;
 import com.libgdx.eskimojoe.game.objects.Glacier;
 import com.libgdx.eskimojoe.game.objects.Mountains;
+import com.libgdx.eskimojoe.game.objects.SnowShoes;
 import com.libgdx.eskimojoe.game.objects.Water;
 
 public class Level 
@@ -42,7 +45,10 @@ public class Level
 	}
 	
 	// objects
+	public EskimoJoe eskimoJoe;
 	public Array<Glacier> glaciers;
+	public Array<Fish> fish;
+	public Array<SnowShoes> snowShoes;
 	
 	// decoration
 	public Clouds clouds;
@@ -56,8 +62,12 @@ public class Level
 	
 	private void init (String filename) 
 	{
+		//player character
+		eskimoJoe = null;
 		//objects
 		glaciers = new Array<Glacier>();
+		fish = new Array<Fish>();
+		snowShoes = new Array<SnowShoes>();
 		
 		// load image file that represents the level data
 		Pixmap pixmap = new Pixmap(Gdx.files.internal(filename));
@@ -98,20 +108,29 @@ public class Level
 						glaciers.get(glaciers.size - 1).increaseLength(1);;
 					}
 				}
-				// player spawn pint
+				// player spawn point
 				else if (BLOCK_TYPE.PLAYER_SPAWNPOINT.sameColor(currentPixel))
 				{
-					
+					obj = new EskimoJoe();
+					offsetHeight = -3.0f;
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					eskimoJoe = (EskimoJoe)obj;
 				}
 				// powerup
 				else if (BLOCK_TYPE.ITEM_POWERUP.sameColor(currentPixel))
 				{
-					
+					obj = new SnowShoes();
+					offsetHeight = -1.5f;
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					snowShoes.add((SnowShoes)obj);
 				}
 				// collectible
 				else if (BLOCK_TYPE.ITEM_COLLECTIBLE.sameColor(currentPixel))
 				{
-					
+					obj = new Fish();
+					offsetHeight = -1.5f;
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					fish.add((Fish)obj);
 				}
 				// unknown object/pixel color
 				else
@@ -150,10 +169,43 @@ public class Level
 			glacier.render(batch);
 		}
 		
+		// Draw Fish
+		for (Fish fish : fish)
+		{
+			fish.render(batch);
+		}
+		
+		// Draw Snow Shoes
+		for (SnowShoes snowShoes : snowShoes)
+		{
+			snowShoes.render(batch);
+		}
+		
+		// Draw Player Character
+		eskimoJoe.render(batch);
+		
 		// Draw Water
 		water.render(batch);
 		
 		// Draw Clouds
 		clouds.render(batch);
+	}
+	
+	public void update (float deltaTime)
+	{
+		eskimoJoe.update(deltaTime);
+		for (Glacier glacier : glaciers)
+		{
+			glacier.update(deltaTime);
+		}
+		for (Fish fish : fish)
+		{
+			fish.update(deltaTime);
+		}
+		for (SnowShoes snowShoes : snowShoes)
+		{
+			snowShoes.update(deltaTime);
+		}
+		clouds.update(deltaTime);
 	}
 }
