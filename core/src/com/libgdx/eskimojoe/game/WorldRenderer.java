@@ -57,8 +57,12 @@ public class WorldRenderer implements Disposable
 	{
 		batch.setProjectionMatrix(cameraGUI.combined);
 		batch.begin();
+		
 		// draw collected gold coins icon + text to top left edge
 		renderGuiScore(batch);
+		
+		// draw collected powerup icon (anchored to top left edge)
+		renderGuiPowerup(batch);
 		
 		// draw extra lives icon + text on top right
 		renderGuiExtraLives(batch);
@@ -144,7 +148,35 @@ public class WorldRenderer implements Disposable
 			fontGameOver.draw(batch, "GAME OVER", x, y, 1, Align.center, false);
 			fontGameOver.setColor(1, 1, 1, 1);
 		}
+	}
+	
+	private void renderGuiPowerup (SpriteBatch batch) 
+	{
+		float x = -15;
+		float y = 30;
+		float timeLeftPowerup = worldController.level.eskimoJoe.timeLeftPowerup;
+		if (timeLeftPowerup > 0) 
+		{
+			// Start icon fade in/out if the left power-up time
+			// is less than 4 seconds. The fade interval is set
+			// to 5 changes per second.
+			if (timeLeftPowerup < 4) 
+			{
+				if (((int)(timeLeftPowerup * 5) % 2) != 0) 
+				{
+					batch.setColor(1, 1, 1, 0.5f);
+				}
+			}
 		}
+		batch.draw(Assets.instance.powerup.powerup, 
+				x, y, 
+				50, 50, 
+				100, 100, 
+				0.35f, -0.35f, 
+				0);
+		batch.setColor(1, 1, 1, 1);
+		Assets.instance.fonts.defaultSmall.draw(batch, "" + (int)timeLeftPowerup, x + 60, y + 57);
+	}
 	
 	public void resize(int width, int height) 
 	{
