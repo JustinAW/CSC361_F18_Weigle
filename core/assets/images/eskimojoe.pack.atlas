@@ -27,23 +27,23 @@ cloud03
   index: -1
 eskimojoe01
   rotate: false
-  xy: 179, 252
-  size: 128, 128
-  orig: 128, 128
+  xy: 179, 275
+  size: 100, 105
+  orig: 100, 105
   offset: 0, 0
   index: -1
 eskimojoe02
   rotate: false
-  xy: 179, 122
-  size: 128, 128
-  orig: 128, 128
+  xy: 179, 168
+  size: 100, 105
+  orig: 100, 105
   offset: 0, 0
   index: -1
 eskimojoe03
   rotate: false
-  xy: 559, 429
-  size: 128, 128
-  orig: 128, 128
+  xy: 179, 61
+  size: 100, 105
+  orig: 100, 105
   offset: 0, 0
   index: -1
 fish
@@ -83,14 +83,14 @@ mountain_right
   index: -1
 snow_shoes
   rotate: false
-  xy: 179, 80
+  xy: 559, 517
   size: 45, 40
   orig: 45, 40
   offset: 0, 0
   index: -1
 water
   rotate: false
-  xy: 309, 220
+  xy: 281, 220
   size: 32, 160
   orig: 32, 160
   offset: 0, 0
