@@ -24,6 +24,6 @@ public class Constants
 	// Length of time (in seconds) that powerup lasts
 	public static final float ITEM_POWERUP_DURATION = 10;
 	
-	//delay after game over to post message and restart game
+	// Delay after game over (to post message and restart game)
 	public static final float TIME_DELAY_GAME_OVER = 3;
 }
