@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.libgdx.eskimojoe.util.Constants;
 import com.libgdx.eskimojoe.game.Assets;
@@ -56,14 +57,17 @@ public class WorldRenderer implements Disposable
 	{
 		batch.setProjectionMatrix(cameraGUI.combined);
 		batch.begin();
-		//draw collected gold coins icon + text to top left edge
+		// draw collected gold coins icon + text to top left edge
 		renderGuiScore(batch);
 		
-		//draw extra lives icon + text on top right
+		// draw extra lives icon + text on top right
 		renderGuiExtraLives(batch);
 		
-		//draw FPS text on bottom right
+		// draw FPS text on bottom right
 		renderGuiFpsCounter(batch);
+		
+		// draw game over text to screen
+		renderGuiGameOverMessage(batch);
 		batch.end();
 	}
 	
@@ -128,6 +132,19 @@ public class WorldRenderer implements Disposable
 		fpsFont.draw(batch, "FPS: " + fps, x, y);
 		fpsFont.setColor(1,1,1,1); // white
 	}
+	
+	private void renderGuiGameOverMessage (SpriteBatch batch) 
+	{
+		float x = cameraGUI.viewportWidth / 2;
+		float y = cameraGUI.viewportHeight / 2;
+		if (worldController.isGameOver()) 
+		{
+			BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
+			fontGameOver.setColor(1, 0.75f, 0.25f, 1);
+			fontGameOver.draw(batch, "GAME OVER", x, y, 1, Align.center, false);
+			fontGameOver.setColor(1, 1, 1, 1);
+		}
+		}
 	
 	public void resize(int width, int height) 
 	{
