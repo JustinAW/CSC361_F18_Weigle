@@ -9,6 +9,7 @@ import com.libgdx.eskimojoe.game.objects.Clouds;
 import com.libgdx.eskimojoe.game.objects.EskimoJoe;
 import com.libgdx.eskimojoe.game.objects.Fish;
 import com.libgdx.eskimojoe.game.objects.Glacier;
+import com.libgdx.eskimojoe.game.objects.IglooGoal;
 import com.libgdx.eskimojoe.game.objects.Mountains;
 import com.libgdx.eskimojoe.game.objects.SnowShoes;
 import com.libgdx.eskimojoe.game.objects.Water;
@@ -54,6 +55,7 @@ public class Level
 	public Clouds clouds;
 	public Mountains mountains;
 	public Water water;
+	public IglooGoal iglooGoal;
 	
 	public Level (String filename)
 	{
@@ -132,6 +134,14 @@ public class Level
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					fish.add((Fish)obj);
 				}
+				// goal
+				else if (BLOCK_TYPE.GOAL.sameColor(currentPixel))
+				{
+					obj = new IglooGoal();
+					offsetHeight = -7.0f;
+					obj.position.set(pixelX, baseHeight + offsetHeight);
+					iglooGoal = (IglooGoal)obj;
+				}
 				// unknown object/pixel color
 				else
 				{
@@ -158,6 +168,7 @@ public class Level
 		pixmap.dispose();
 		Gdx.app.debug(TAG,  "level '" + filename + "' loaded");
 	}
+	
 	public void render (SpriteBatch batch) 
 	{
 		// Draw Mountains
@@ -189,6 +200,9 @@ public class Level
 		
 		// Draw Clouds
 		clouds.render(batch);
+		
+		// Draw Igloo
+		iglooGoal.render(batch);
 	}
 	
 	public void update (float deltaTime)
