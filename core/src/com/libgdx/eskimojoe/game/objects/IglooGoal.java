@@ -15,7 +15,7 @@ public class IglooGoal extends AbstractGameObject
 	
 	private void init ()
 	{
-		dimension.set(3.0f, 3.0f);
+		dimension.set(5.0f, 3.0f);
 		regGoal = Assets.instance.levelDecoration.iglooGoal;
 		
 		// Set bounding box for collision detection
