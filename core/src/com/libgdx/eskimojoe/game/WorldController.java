@@ -10,18 +10,27 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 import com.libgdx.eskimojoe.game.Assets;
 import com.libgdx.eskimojoe.game.objects.EskimoJoe;
 import com.libgdx.eskimojoe.game.objects.EskimoJoe.JUMP_STATE;
 import com.libgdx.eskimojoe.game.objects.Fish;
 import com.libgdx.eskimojoe.game.objects.Glacier;
+import com.libgdx.eskimojoe.game.objects.Icicle;
 import com.libgdx.eskimojoe.game.objects.SnowShoes;
 import com.libgdx.eskimojoe.util.CameraHelper;
 import com.libgdx.eskimojoe.util.Constants;
 
-public class WorldController extends InputAdapter
+public class WorldController extends InputAdapter implements Disposable
 {
 	private static final String TAG = WorldController.class.getName();
 	
@@ -37,8 +46,14 @@ public class WorldController extends InputAdapter
 	private Rectangle r1 = new Rectangle();
 	private Rectangle r2 = new Rectangle();
 	
-	// Game Over Time Delay
+	// Game Over Delay
 	private float timeLeftGameOverDelay;
+	
+	// Goal
+	private boolean goalReached;
+	
+	// World
+	public World b2world;
 	
 	public WorldController ()
 	{
@@ -57,8 +72,37 @@ public class WorldController extends InputAdapter
 	private void initLevel () 
 	{
 		score = 0;
+		goalReached = false;
 		level = new Level(Constants.LEVEL_01);
 		cameraHelper.setTarget(level.eskimoJoe);
+		initPhysics();
+	}
+	
+	private void initPhysics ()
+	{
+		if (b2world != null) b2world.dispose();
+		b2world = new World(new Vector2(0, -9.81f), true);
+		
+		// Glaciers
+		Vector2 origin = new Vector2();
+		for (Glacier glacier : level.glaciers)
+		{
+			BodyDef bodyDef = new BodyDef();
+			bodyDef.type = BodyType.KinematicBody;
+			bodyDef.position.set(glacier.position);
+			Body body = b2world.createBody(bodyDef);
+			glacier.body = body;
+			PolygonShape polygonShape = new PolygonShape();
+			origin.x = glacier.bounds.width / 2.0f;
+			origin.y = glacier.bounds.height / 2.0f;
+			polygonShape.setAsBox(glacier.bounds.width / 2.0f, 
+								  glacier.bounds.height / 2.0f, 
+								  origin, 0);
+			FixtureDef fixtureDef = new FixtureDef();
+			fixtureDef.shape = polygonShape;
+			body.createFixture(fixtureDef);
+			polygonShape.dispose();
+		}
 	}
 	
 	private void handleDebugInput (float deltaTime)
@@ -142,6 +186,16 @@ public class WorldController extends InputAdapter
 		Gdx.app.log(TAG, "Snow Shoes collected");
 	}
 	
+	private void onCollisionWithIglooGoal()
+	{
+		goalReached = true;
+		timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_FINISHED;
+		Vector2 centerPosEskimoJoe = new Vector2(level.eskimoJoe.position);
+		centerPosEskimoJoe.x += level.eskimoJoe.bounds.width;
+		spawnIcicles(centerPosEskimoJoe, 
+				Constants.ICICLES_SPAWN_MAX, Constants.ICICLES_SPAWN_RADIUS);
+	}
+	
 	private void testCollisions () 
 	{
 		r1.set(level.eskimoJoe.position.x, level.eskimoJoe.position.y,
@@ -175,6 +229,15 @@ public class WorldController extends InputAdapter
 			if (!r1.overlaps(r2)) continue;
 			onCollisionWithSnowShoes(snowShoes);
 			break;
+		}
+		
+		// Test collision: Player <-> Goal
+		if (!goalReached) 
+		{
+			r2.set(level.iglooGoal.bounds);
+			r2.x += level.iglooGoal.position.x;
+			r2.y += level.iglooGoal.position.y;
+			if (r1.overlaps(r2)) onCollisionWithIglooGoal();
 		}
 	}
 	
@@ -214,10 +277,59 @@ public class WorldController extends InputAdapter
 		return level.eskimoJoe.position.y < -5;
 	}
 	
+	private void spawnIcicles (Vector2 pos, int numIcicles, float radius)
+	{
+		float icicleShapeScale = 0.5f;
+		
+		// create icicles with box2d body and fixture
+		for (int i = 0; i < numIcicles; i++)
+		{
+			Icicle icicle = new Icicle();
+			
+			// calculate random spawn position, rotation, and scale
+			float x = MathUtils.random(-radius, radius);
+			float y = MathUtils.random(5.0f, 15.0f);
+			float rotation = MathUtils.random(0.0f, 360.0f)
+					* MathUtils.degreesToRadians;
+			float icicleScale = MathUtils.random(0.5f, 1.5f);
+			icicle.scale.set(icicleScale, icicleScale);
+			
+			// create box2d body for carrot with start position
+			// and angle of rotation
+			BodyDef bodyDef = new BodyDef();
+			bodyDef.position.set(pos);
+			bodyDef.position.add(x, y);
+			bodyDef.angle = rotation;
+			Body body = b2world.createBody(bodyDef);
+			body.setType(BodyType.DynamicBody);
+			icicle.body = body;
+			
+			// create rectangular shape for icicle to allow
+			// interactions (collisions) with other objects
+			PolygonShape polygonShape = new PolygonShape();
+			float halfWidth = icicle.bounds.width / 2.0f * icicleScale;
+			float halfHeight = icicle.bounds.height /2.0f * icicleScale;
+			polygonShape.setAsBox(halfWidth * icicleShapeScale,
+			halfHeight * icicleShapeScale);
+			
+			// set physics attributes
+			FixtureDef fixtureDef = new FixtureDef();
+			fixtureDef.shape = polygonShape;
+			fixtureDef.density = 50;
+			fixtureDef.restitution = 0.5f;
+			fixtureDef.friction = 0.5f;
+			body.createFixture(fixtureDef);
+			polygonShape.dispose();
+			
+			// finally, add new icicle to list for updating/rendering
+			level.icicles.add(icicle);
+		}
+	}
+	
 	public void update (float deltaTime)
 	{
 		handleDebugInput(deltaTime);
-		if (isGameOver())
+		if (isGameOver() || goalReached)
 		{
 			timeLeftGameOverDelay -= deltaTime;
 			if (timeLeftGameOverDelay < 0) init();
@@ -228,6 +340,7 @@ public class WorldController extends InputAdapter
 		}
 		level.update(deltaTime);
 		testCollisions();
+		b2world.step(deltaTime, 8, 3);
 		cameraHelper.update(deltaTime);
 		if (!isGameOver() && isPlayerInWater())
 		{
@@ -259,5 +372,11 @@ public class WorldController extends InputAdapter
 			Gdx.app.debug(TAG, "camera follow enabled: " + cameraHelper.hasTarget());
 		}
 		return false;
+	}
+	
+	@Override 
+	public void dispose ()
+	{
+		if (b2world != null) b2world.dispose();
 	}
 }

@@ -141,6 +141,7 @@ public class Assets implements Disposable, AssetErrorListener
 		public final AtlasRegion mountainLeft;
 		public final AtlasRegion mountainRight;
 		public final AtlasRegion water;
+		public final AtlasRegion icicle;
 		public final AtlasRegion iglooGoal;
 		
 		public AssetLevelDecoration (TextureAtlas atlas)
@@ -151,6 +152,7 @@ public class Assets implements Disposable, AssetErrorListener
 			mountainLeft = atlas.findRegion("mountain_left");
 			mountainRight = atlas.findRegion("mountain_right");
 			water = atlas.findRegion("water");
+			icicle = atlas.findRegion("icicle");
 			iglooGoal = atlas.findRegion("igloo");
 		}
 	}
