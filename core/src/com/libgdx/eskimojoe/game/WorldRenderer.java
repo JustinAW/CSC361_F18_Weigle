@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.libgdx.eskimojoe.util.Constants;
 import com.libgdx.eskimojoe.game.Assets;
@@ -15,6 +17,10 @@ public class WorldRenderer implements Disposable
 	private OrthographicCamera cameraGUI;
 	private SpriteBatch batch;
 	private WorldController worldController;
+	
+	// Box2d Debug
+	private static final boolean DEBUG_DRAW_BOX2D_WORLD = false;
+	private Box2DDebugRenderer b2debugRenderer;
 	
 	public WorldRenderer (WorldController worldController) 
 	{
@@ -35,6 +41,9 @@ public class WorldRenderer implements Disposable
 		cameraGUI.position.set(0, 0, 0);
 		cameraGUI.setToOrtho(true); // flip y-axis
 		cameraGUI.update();
+		
+		// Box2d debug
+		b2debugRenderer = new Box2DDebugRenderer();
 	}
 	
 	public void render() 
@@ -50,20 +59,33 @@ public class WorldRenderer implements Disposable
 		batch.begin();
 		worldController.level.render(batch);
 		batch.end();
+		
+		// Box2d debug
+		if (DEBUG_DRAW_BOX2D_WORLD)
+		{
+			b2debugRenderer.render(worldController.b2world,  camera.combined);
+		}
 	}
 	
 	private void renderGui(SpriteBatch batch)
 	{
 		batch.setProjectionMatrix(cameraGUI.combined);
 		batch.begin();
-		//draw collected gold coins icon + text to top left edge
+		
+		// draw collected gold coins icon + text to top left edge
 		renderGuiScore(batch);
 		
-		//draw extra lives icon + text on top right
+		// draw collected powerup icon (anchored to top left edge)
+		renderGuiPowerup(batch);
+		
+		// draw extra lives icon + text on top right
 		renderGuiExtraLives(batch);
 		
-		//draw FPS text on bottom right
+		// draw FPS text on bottom right
 		renderGuiFpsCounter(batch);
+		
+		// draw game over text to screen
+		renderGuiGameOverMessage(batch);
 		batch.end();
 	}
 	
@@ -127,6 +149,47 @@ public class WorldRenderer implements Disposable
 		
 		fpsFont.draw(batch, "FPS: " + fps, x, y);
 		fpsFont.setColor(1,1,1,1); // white
+	}
+	
+	private void renderGuiGameOverMessage (SpriteBatch batch) 
+	{
+		float x = cameraGUI.viewportWidth / 2;
+		float y = cameraGUI.viewportHeight / 2;
+		if (worldController.isGameOver()) 
+		{
+			BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
+			fontGameOver.setColor(1, 0.75f, 0.25f, 1);
+			fontGameOver.draw(batch, "GAME OVER", x, y, 1, Align.center, false);
+			fontGameOver.setColor(1, 1, 1, 1);
+		}
+	}
+	
+	private void renderGuiPowerup (SpriteBatch batch) 
+	{
+		float x = -15;
+		float y = 30;
+		float timeLeftPowerup = worldController.level.eskimoJoe.timeLeftPowerup;
+		if (timeLeftPowerup > 0) 
+		{
+			// Start icon fade in/out if the left power-up time
+			// is less than 4 seconds. The fade interval is set
+			// to 5 changes per second.
+			if (timeLeftPowerup < 4) 
+			{
+				if (((int)(timeLeftPowerup * 5) % 2) != 0) 
+				{
+					batch.setColor(1, 1, 1, 0.5f);
+				}
+			}
+		}
+		batch.draw(Assets.instance.powerup.powerup, 
+				x, y, 
+				50, 50, 
+				100, 100, 
+				0.35f, -0.35f, 
+				0);
+		batch.setColor(1, 1, 1, 1);
+		Assets.instance.fonts.defaultSmall.draw(batch, "" + (int)timeLeftPowerup, x + 60, y + 57);
 	}
 	
 	public void resize(int width, int height) 
