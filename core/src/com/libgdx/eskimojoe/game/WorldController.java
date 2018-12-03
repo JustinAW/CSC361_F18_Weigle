@@ -2,6 +2,7 @@ package com.libgdx.eskimojoe.game;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,6 +28,7 @@ import com.libgdx.eskimojoe.game.objects.Fish;
 import com.libgdx.eskimojoe.game.objects.Glacier;
 import com.libgdx.eskimojoe.game.objects.Icicle;
 import com.libgdx.eskimojoe.game.objects.SnowShoes;
+import com.libgdx.eskimojoe.screens.MenuScreen;
 import com.libgdx.eskimojoe.util.CameraHelper;
 import com.libgdx.eskimojoe.util.Constants;
 
@@ -55,8 +57,11 @@ public class WorldController extends InputAdapter implements Disposable
 	// World
 	public World b2world;
 	
-	public WorldController ()
+	private Game game;
+	
+	public WorldController (Game game)
 	{
+		this.game = game;
 		init();
 	}
 	
@@ -136,6 +141,12 @@ public class WorldController extends InputAdapter implements Disposable
 		x += cameraHelper.getPosition().x;
 		y += cameraHelper.getPosition().y;
 		cameraHelper.setPosition(x,  y);
+	}
+	
+	private void backToMenu ()
+	{
+		// switch to menu screen
+		game.setScreen(new MenuScreen(game));
 	}
 	
 	private void onCollisionWithGlacier(Glacier glacier) 
@@ -329,19 +340,23 @@ public class WorldController extends InputAdapter implements Disposable
 	public void update (float deltaTime)
 	{
 		handleDebugInput(deltaTime);
+		
 		if (isGameOver() || goalReached)
 		{
 			timeLeftGameOverDelay -= deltaTime;
+			if (timeLeftGameOverDelay < 0) backToMenu();
 			if (timeLeftGameOverDelay < 0) init();
 		}
 		else
 		{
 			handleInputGame(deltaTime);
 		}
+		
 		level.update(deltaTime);
 		testCollisions();
 		b2world.step(deltaTime, 8, 3);
 		cameraHelper.update(deltaTime);
+		
 		if (!isGameOver() && isPlayerInWater())
 		{
 			lives--;
@@ -370,6 +385,11 @@ public class WorldController extends InputAdapter implements Disposable
 		{
 			cameraHelper.setTarget(cameraHelper.hasTarget() ? null : level.eskimoJoe);
 			Gdx.app.debug(TAG, "camera follow enabled: " + cameraHelper.hasTarget());
+		}
+		// Back to Menu
+		else if (keycode == Keys.ESCAPE || keycode == Keys.BACK) 
+		{
+			backToMenu();
 		}
 		return false;
 	}
