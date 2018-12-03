@@ -89,4 +89,22 @@ public class Glacier extends AbstractGameObject
 				reg.getRegionWidth(), reg.getRegionHeight(), 
 				true, false);
 	}
+	
+//	@Override
+//	public void update (float deltaTime) 
+//	{
+//		super.update(deltaTime);
+//		floatCycleTimeLeft -= deltaTime;
+//		if (floatCycleTimeLeft <= 0) 
+//		{
+//			floatCycleTimeLeft = FLOAT_CYCLE_TIME;
+//			floatingDownwards = !floatingDownwards;
+//			body.setLinearVelocity(0, 
+//					FLOAT_AMPLITUDE(floatingDownwards ? -1 : 1));
+//		} 
+//		else 
+//		{
+//			body.setLinearVelocity(body.getLinearVelocity().scl(0.98f));
+//		}
+//	}
 }

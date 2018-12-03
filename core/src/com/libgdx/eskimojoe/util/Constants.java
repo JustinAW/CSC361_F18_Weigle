@@ -22,8 +22,17 @@ public class Constants
 	public static final int LIVES_START = 3;
 	
 	// Length of time (in seconds) that powerup lasts
-	public static final float ITEM_POWERUP_DURATION = 10;
+	public static final float ITEM_POWERUP_DURATION = 15;
 	
 	// Delay after game over (to post message and restart game)
 	public static final float TIME_DELAY_GAME_OVER = 3;
+	
+	// Number of Icicles to Spawn
+	public static final int ICICLES_SPAWN_MAX = 100;
+	
+	// Spawn Radius for Icicles
+	public static final float ICICLES_SPAWN_RADIUS = 3.5f;
+	
+	// Delay After Game Finished
+	public static final float TIME_DELAY_GAME_FINISHED = 6;
 }

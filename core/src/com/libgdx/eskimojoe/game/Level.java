@@ -9,6 +9,7 @@ import com.libgdx.eskimojoe.game.objects.Clouds;
 import com.libgdx.eskimojoe.game.objects.EskimoJoe;
 import com.libgdx.eskimojoe.game.objects.Fish;
 import com.libgdx.eskimojoe.game.objects.Glacier;
+import com.libgdx.eskimojoe.game.objects.Icicle;
 import com.libgdx.eskimojoe.game.objects.IglooGoal;
 import com.libgdx.eskimojoe.game.objects.Mountains;
 import com.libgdx.eskimojoe.game.objects.SnowShoes;
@@ -50,6 +51,7 @@ public class Level
 	public Array<Glacier> glaciers;
 	public Array<Fish> fish;
 	public Array<SnowShoes> snowShoes;
+	public Array<Icicle> icicles;
 	
 	// decoration
 	public Clouds clouds;
@@ -70,6 +72,7 @@ public class Level
 		glaciers = new Array<Glacier>();
 		fish = new Array<Fish>();
 		snowShoes = new Array<SnowShoes>();
+		icicles = new Array<Icicle>();
 		
 		// load image file that represents the level data
 		Pixmap pixmap = new Pixmap(Gdx.files.internal(filename));
@@ -192,6 +195,12 @@ public class Level
 			snowShoes.render(batch);
 		}
 		
+		// Draw Icicles
+		for (Icicle icicle : icicles)
+		{
+			icicle.render(batch);
+		}
+		
 		// Draw Player Character
 		eskimoJoe.render(batch);
 		
@@ -219,6 +228,10 @@ public class Level
 		for (SnowShoes snowShoes : snowShoes)
 		{
 			snowShoes.update(deltaTime);
+		}
+		for (Icicle icicle : icicles)
+		{
+			icicle.update(deltaTime);
 		}
 		clouds.update(deltaTime);
 	}

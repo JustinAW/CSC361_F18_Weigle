@@ -67,6 +67,13 @@ glacier_middle
   orig: 85, 497
   offset: 0, 0
   index: -1
+icicle
+  rotate: false
+  xy: 481, 278
+  size: 20, 52
+  orig: 20, 52
+  offset: 0, 0
+  index: -1
 igloo
   rotate: false
   xy: 179, 334
