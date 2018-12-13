@@ -19,11 +19,14 @@ public class DesktopLauncher {
 			settings.maxHeight = 1024;
 			settings.duplicatePadding = false;
 			settings.debug = drawDebugOutline;
-			TexturePacker.process(settings, "assets-raw/images", "../core/assets/images",
-					"eskimojoe.pack");
+			TexturePacker.process(settings, "assets-raw/images",
+					"../core/assets/images", "eskimojoe.pack");
+			TexturePacker.process(settings, "assets-raw/images-ui",
+					"../core/assets/images", "eskimojoe-ui.pack");
 		}
 				
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		LwjglApplicationConfiguration config = 
+				new LwjglApplicationConfiguration();
 		config.title = "Eskimo Joe";
 		config.width = 800;
 		config.height = 480;
