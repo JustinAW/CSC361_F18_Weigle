@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.libgdx.eskimojoe.game.Assets;
+import com.libgdx.eskimojoe.util.CharacterSkin;
 import com.libgdx.eskimojoe.util.Constants;
 
 public class MenuScreen extends AbstractScreen 
@@ -46,6 +47,7 @@ public class MenuScreen extends AbstractScreen
 	private TextButton btnWinOptCancel;
 	private CheckBox chkMusic;
 	private Slider sldMusic;
+	private SelectBox<CharacterSkin> selCharSkin;
 	private Image imgCharSkin;
 	private CheckBox chkShowFpsCounter;
 	
@@ -89,23 +91,28 @@ public class MenuScreen extends AbstractScreen
 	private Table buildBackgroundLayer () 
 	{
 		Table layer = new Table();
+		
 		// + Background
 		imgBackground = new Image(skinEskimoJoe, "background");
 		layer.add(imgBackground);
+		
 		return layer;
 	}
 	
 	private Table buildObjectsLayer () 
 	{
 		Table layer = new Table();
-		// + Coins
+		
+		// + Fish
 		imgFish = new Image(skinEskimoJoe, "fish");
 		layer.addActor(imgFish);
 		imgFish.setPosition(135, 80);
-		// + Bunny
+		
+		// + EskimoJoe
 		imgJoe = new Image(skinEskimoJoe, "eskimojoe");
 		layer.addActor(imgJoe);
 		imgJoe.setPosition(355, 40);
+		
 		return layer;
 	}
 	
@@ -113,13 +120,16 @@ public class MenuScreen extends AbstractScreen
 	{
 		Table layer = new Table();
 		layer.left().top();
+		
 		// + Game Logo
 		imgLogo = new Image(skinEskimoJoe, "logo");
 		layer.add(imgLogo);
 		layer.row().expandY();
+		
 		// + Info Logos
 		imgInfo = new Image(skinEskimoJoe, "info");
 		layer.add(imgInfo).bottom();
+		
 		if (debugEnabled) layer.debug();
 		return layer;
 	}
@@ -128,25 +138,32 @@ public class MenuScreen extends AbstractScreen
 	{
 		Table layer = new Table();
 		layer.right().bottom();
+		
 		// + Play Button
 		btnMenuPlay = new Button(skinEskimoJoe, "play");
 		layer.add(btnMenuPlay);
-		btnMenuPlay.addListener(new ChangeListener() {
-		@Override
-		public void changed (ChangeEvent event, Actor actor) {
-		onPlayClicked();
-		}
+		btnMenuPlay.addListener(new ChangeListener() 
+		{
+			@Override
+			public void changed (ChangeEvent event, Actor actor) 
+			{
+				onPlayClicked();
+			}
 		});
 		layer.row();
+		
 		// + Options Button
 		btnMenuOptions = new Button(skinEskimoJoe, "options");
 		layer.add(btnMenuOptions);
-		btnMenuOptions.addListener(new ChangeListener() {
-		@Override
-		public void changed (ChangeEvent event, Actor actor) {
-		onOptionsClicked();
-		}
+		btnMenuOptions.addListener(new ChangeListener() 
+		{
+			@Override
+			public void changed (ChangeEvent event, Actor actor) 
+			{
+				onOptionsClicked();
+			}
 		});
+		
 		if (debugEnabled) layer.debug();
 		return layer;
 	}
