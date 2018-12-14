@@ -15,6 +15,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.utils.Disposable;
 import com.libgdx.eskimojoe.util.Constants;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 /**
  * Class for loading and organizing assets
@@ -24,6 +26,9 @@ public class Assets implements Disposable, AssetErrorListener
 	public static final String TAG = Assets.class.getName();
 	public static final Assets instance = new Assets();
 	private AssetManager assetManager;
+	
+	public AssetSounds sounds;
+	public AssetMusic music;
 	
 	// singleton: prevent instantiation from other classes
 	private Assets() {}
@@ -38,10 +43,22 @@ public class Assets implements Disposable, AssetErrorListener
 	public void init (AssetManager assetManager)
 	{
 		this.assetManager = assetManager;
+		
 		// set asset manager error handler
 		assetManager.setErrorListener(this);
+		
 		// load texture atlas
 		assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
+		
+		// load sounds
+		assetManager.load("sounds/jump.wav", Sound.class);
+		assetManager.load("sounds/eating.wav", Sound.class);
+		assetManager.load("sounds.powerup.wav", Sound.class);
+		assetManager.load("sounds/death.wav", Sound.class);
+		
+		// load music
+		assetManager.load("music/winterapproaches.mp3", Music.class);
+		
 		// start loading assets and wait until finished
 		assetManager.finishLoading();
 		Gdx.app.debug(TAG,
@@ -65,6 +82,34 @@ public class Assets implements Disposable, AssetErrorListener
 		collectible = new AssetCollectible(atlas);
 		powerup = new AssetPowerup(atlas);
 		levelDecoration = new AssetLevelDecoration(atlas);
+		sounds = new AssetSounds(assetManager);
+		music = new AssetMusic(assetManager);
+	}
+	
+	public class AssetSounds
+	{
+		public final Sound jump;
+		public final Sound eating;
+		public final Sound collectPowerup;
+		public final Sound died;
+		
+		public AssetSounds (AssetManager am)
+		{
+			jump = am.get("sounds/jump.wav", Sound.class);
+			eating = am.get("sounds/eating.wav", Sound.class);
+			collectPowerup = am.get("sounds/powerup.wav", Sound.class);
+			died = am.get("sounds/death.wav", Sound.class);
+		}
+	}
+	
+	public class AssetMusic
+	{
+		public final Music song01;
+		
+		public AssetMusic (AssetManager am)
+		{
+			song01 = am.get("music/winterapproaches.mp3", Music.class);
+		}
 	}
 	
 	public class AssetFonts
