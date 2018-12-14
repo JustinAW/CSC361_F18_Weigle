@@ -3,6 +3,7 @@ package com.libgdx.eskimojoe.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.libgdx.eskimojoe.util.GamePreferences;
 import com.libgdx.eskimojoe.game.WorldController;
 import com.libgdx.eskimojoe.game.WorldRenderer;
 
@@ -47,6 +48,7 @@ public class GameScreen extends AbstractScreen
 	@Override
 	public void show () 
 	{
+		GamePreferences.instance.load();
 		worldController = new WorldController(game);
 		worldRenderer = new WorldRenderer(worldController);
 		Gdx.input.setCatchBackKey(true);

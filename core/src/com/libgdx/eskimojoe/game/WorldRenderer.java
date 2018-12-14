@@ -8,8 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
-import com.libgdx.eskimojoe.util.Constants;
 import com.libgdx.eskimojoe.game.Assets;
+import com.libgdx.eskimojoe.util.Constants;
+import com.libgdx.eskimojoe.util.GamePreferences;
 
 public class WorldRenderer implements Disposable
 {
@@ -82,7 +83,10 @@ public class WorldRenderer implements Disposable
 		renderGuiExtraLives(batch);
 		
 		// draw FPS text on bottom right
-		renderGuiFpsCounter(batch);
+		if (GamePreferences.instance.showFpsCounter)
+		{
+			renderGuiFpsCounter(batch);
+		}
 		
 		// draw game over text to screen
 		renderGuiGameOverMessage(batch);
