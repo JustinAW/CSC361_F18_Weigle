@@ -48,4 +48,7 @@ public class Constants
 	
 	// Delay After Game Finished
 	public static final float TIME_DELAY_GAME_FINISHED = 6;
+	
+	// Stored Preferences Selected in Options Menu
+	public static final String PREFERENCES = "eskimojoe.preferences";
 }
