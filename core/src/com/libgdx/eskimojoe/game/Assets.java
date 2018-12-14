@@ -44,7 +44,8 @@ public class Assets implements Disposable, AssetErrorListener
 		assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
 		// start loading assets and wait until finished
 		assetManager.finishLoading();
-		Gdx.app.debug(TAG,  "# of assets loaded: " + assetManager.getAssetNames().size);
+		Gdx.app.debug(TAG,
+				"# of assets loaded: " + assetManager.getAssetNames().size);
 		for (String a : assetManager.getAssetNames())
 		{
 			Gdx.app.debug(TAG,  "asset: " + a);
@@ -75,9 +76,12 @@ public class Assets implements Disposable, AssetErrorListener
 		public AssetFonts()
 		{
 			//create three fonts using Libgdx 15px bitmap font
-			defaultSmall = new BitmapFont(Gdx.files.internal("images/arial-15.fnt"), true);
-			defaultNormal = new BitmapFont(Gdx.files.internal("images/arial-15.fnt"), true);
-			defaultBig = new BitmapFont(Gdx.files.internal("images/arial-15.fnt"), true);
+			defaultSmall = new BitmapFont(
+					Gdx.files.internal("images/arial-15.fnt"), true);
+			defaultNormal = new BitmapFont(
+					Gdx.files.internal("images/arial-15.fnt"), true);
+			defaultBig = new BitmapFont(
+					Gdx.files.internal("images/arial-15.fnt"), true);
 			
 			//set font sizes
 			defaultSmall.getData().setScale(0.75f);
@@ -85,9 +89,12 @@ public class Assets implements Disposable, AssetErrorListener
 			defaultBig.getData().setScale(2.0f);
 			
 			//enable linear texture filtering for smooth fonts
-			defaultSmall.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-			defaultNormal.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-			defaultBig.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+			defaultSmall.getRegion().getTexture().setFilter(
+					TextureFilter.Linear, TextureFilter.Linear);
+			defaultNormal.getRegion().getTexture().setFilter(
+					TextureFilter.Linear, TextureFilter.Linear);
+			defaultBig.getRegion().getTexture().setFilter(
+					TextureFilter.Linear, TextureFilter.Linear);
 		}
 	}
 	
@@ -168,12 +175,14 @@ public class Assets implements Disposable, AssetErrorListener
 	
 	public void error (String filename, Class type, Throwable throwable)
 	{
-		Gdx.app.error(TAG,  "Couldn't load asset '" + filename + "'", (Exception)throwable);
+		Gdx.app.error(TAG,  "Couldn't load asset '" + filename + "'",
+				(Exception)throwable);
 	}
 	
 	@Override
 	public void error (AssetDescriptor asset, Throwable throwable)
 	{
-		Gdx.app.error(TAG,  "Couldn't load asset '" + asset.fileName + "'", (Exception)throwable);
+		Gdx.app.error(TAG,  "Couldn't load asset '" + asset.fileName + "'",
+				(Exception)throwable);
 	}
 }

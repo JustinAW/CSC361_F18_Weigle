@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.libgdx.eskimojoe.game.Assets;
 import com.libgdx.eskimojoe.game.objects.AbstractGameObject;
+import com.libgdx.eskimojoe.util.CharacterSkin;
 import com.libgdx.eskimojoe.util.Constants;
+import com.libgdx.eskimojoe.util.GamePreferences;
 
 public class EskimoJoe extends AbstractGameObject
 {
@@ -102,7 +104,8 @@ public class EskimoJoe extends AbstractGameObject
 		super.update(deltaTime);
 		if(velocity.x != 0)
 		{
-			viewDirection = velocity.x < 0 ? VIEW_DIRECTION.LEFT : VIEW_DIRECTION.RIGHT;
+			viewDirection = velocity.x < 0 ? VIEW_DIRECTION.LEFT : 
+				VIEW_DIRECTION.RIGHT;
 		}
 		
 		if(timeLeftPowerup > 0)
@@ -161,6 +164,11 @@ public class EskimoJoe extends AbstractGameObject
 	{
 		TextureRegion reg = null;
 		
+		// Apply Skin Color
+		batch.setColor(
+		CharacterSkin.values()[GamePreferences.instance.charSkin]
+		.getColor());
+		
 		//set special color when game object has a powerup
 		if(hasPowerup)
 		{
@@ -168,10 +176,15 @@ public class EskimoJoe extends AbstractGameObject
 		}
 		//draw image
 		reg = regJoe;
-		batch.draw(reg.getTexture(), position.x, position.y, origin.x, origin.y, 
-				dimension.x, dimension.y, scale.x, scale.y, rotation, 
-				reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(),
-				reg.getRegionHeight(), viewDirection == VIEW_DIRECTION.LEFT, false);
+		batch.draw(reg.getTexture(), 
+				position.x, position.y,
+				origin.x, origin.y, 
+				dimension.x, dimension.y,
+				scale.x, scale.y,
+				rotation, 
+				reg.getRegionX(), reg.getRegionY(), 
+				reg.getRegionWidth(), reg.getRegionHeight(),
+				viewDirection == VIEW_DIRECTION.LEFT, false);
 		
 		//reset color
 		batch.setColor(1,1,1,1);
