@@ -7,6 +7,8 @@ import com.libgdx.eskimojoe.game.objects.AbstractGameObject;
 import com.libgdx.eskimojoe.util.CharacterSkin;
 import com.libgdx.eskimojoe.util.Constants;
 import com.libgdx.eskimojoe.util.GamePreferences;
+import com.badlogic.gdx.math.MathUtils;
+import com.libgdx.eskimojoe.util.AudioManager;
 
 public class EskimoJoe extends AbstractGameObject
 {
@@ -61,6 +63,7 @@ public class EskimoJoe extends AbstractGameObject
     		case GROUNDED: //character is standing
     		  if(jumpKeyPressed)
     		  {
+    			  //AudioManager.instance.play(Assets.instance.sounds.jump);
     			  //start counting jump time from the beginning
     			  timeJumping = 0;
     			  jumpState = JUMP_STATE.JUMP_RISING;
