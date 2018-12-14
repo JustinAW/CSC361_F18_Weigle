@@ -31,6 +31,7 @@ import com.libgdx.eskimojoe.game.objects.SnowShoes;
 import com.libgdx.eskimojoe.screens.MenuScreen;
 import com.libgdx.eskimojoe.util.CameraHelper;
 import com.libgdx.eskimojoe.util.Constants;
+import com.libgdx.eskimojoe.util.AudioManager;
 
 public class WorldController extends InputAdapter implements Disposable
 {
@@ -185,6 +186,7 @@ public class WorldController extends InputAdapter implements Disposable
 	private void onCollisionWithFish(Fish fish) 
 	{
 		fish.collected = true;
+		AudioManager.instance.play(Assets.instance.sounds.eating);
 		score += fish.getScore();
 		Gdx.app.log(TAG, "Fish collected");
 	}
@@ -192,6 +194,7 @@ public class WorldController extends InputAdapter implements Disposable
 	private void onCollisionWithSnowShoes(SnowShoes snowShoes) 
 	{
 		snowShoes.collected = true;
+		AudioManager.instance.play(Assets.instance.sounds.collectPowerup);
 		score += snowShoes.getScore();
 		level.eskimoJoe.setPowerup(true);
 		Gdx.app.log(TAG, "Snow Shoes collected");
@@ -359,6 +362,7 @@ public class WorldController extends InputAdapter implements Disposable
 		
 		if (!isGameOver() && isPlayerInWater())
 		{
+			AudioManager.instance.play(Assets.instance.sounds.died);
 			lives--;
 			if (isGameOver())
 			{

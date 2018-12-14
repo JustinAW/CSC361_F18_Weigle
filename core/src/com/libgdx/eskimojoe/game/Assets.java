@@ -53,7 +53,7 @@ public class Assets implements Disposable, AssetErrorListener
 		// load sounds
 		assetManager.load("sounds/jump.wav", Sound.class);
 		assetManager.load("sounds/eating.wav", Sound.class);
-		assetManager.load("sounds.powerup.wav", Sound.class);
+		assetManager.load("sounds/powerup.wav", Sound.class);
 		assetManager.load("sounds/death.wav", Sound.class);
 		
 		// load music
@@ -88,14 +88,14 @@ public class Assets implements Disposable, AssetErrorListener
 	
 	public class AssetSounds
 	{
-		public final Sound jump;
+		//public final Sound jump;
 		public final Sound eating;
 		public final Sound collectPowerup;
 		public final Sound died;
 		
 		public AssetSounds (AssetManager am)
 		{
-			jump = am.get("sounds/jump.wav", Sound.class);
+			//jump = am.get("sounds/jump.wav", Sound.class);
 			eating = am.get("sounds/eating.wav", Sound.class);
 			collectPowerup = am.get("sounds/powerup.wav", Sound.class);
 			died = am.get("sounds/death.wav", Sound.class);

@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.libgdx.eskimojoe.game.Assets;
+import com.libgdx.eskimojoe.util.AudioManager;
 import com.libgdx.eskimojoe.util.CharacterSkin;
 import com.libgdx.eskimojoe.util.GamePreferences;
 import com.libgdx.eskimojoe.util.Constants;
@@ -381,6 +382,7 @@ public class MenuScreen extends AbstractScreen
 	{
 		saveSettings();
 		onCancelClicked();
+		AudioManager.instance.onSettingsUpdated();
 	}
 	
 	private void onCancelClicked() 
@@ -388,6 +390,7 @@ public class MenuScreen extends AbstractScreen
 		btnMenuPlay.setVisible(true);
 		btnMenuOptions.setVisible(true);
 		winOptions.setVisible(false);
+		AudioManager.instance.onSettingsUpdated();
 	}
 		
 	@Override
